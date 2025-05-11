@@ -2,9 +2,8 @@
 
 SendMode("Input") 
 
-SetWorkingDir("E:\code\HotkeylessAHK\")
-Run("E:\code\HotkeylessAHK\HotkeylessAHK.ahk")
+SetWorkingDir("D:\Coding\HotkeylessAHK\")
+Run("D:\Coding\HotkeylessAHK\HotkeylessAHK.ahk")
 
-SetWorkingDir("E:\code\AutoHotkeyScripts")
-Run("E:\code\AutoHotkeyScripts\ahk.ahk")
-Run("E:\code\AutoHotkeyScripts\rightclickmod.ahk")
+SetWorkingDir("D:\Coding\AutoHotkeyScripts")
+Run("D:\Coding\AutoHotkeyScripts\ahk.ahk")

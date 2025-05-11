@@ -10,9 +10,6 @@ TraySetIcon("shell32.dll", "16")
 SetCapsLockState("AlwaysOff") ; Disable Capslock
 SetTitleMatchMode(2) ; Title matches anything that contains the specified string
 
-; Overwrite windows+E
-#E:: Run("explorer.exe E:\")
-
 ; Overwrites the apostrophe key to be actually useful without dumb extra key presses
 SC00D:: Send("{Raw}" "`` ")
 
@@ -20,7 +17,7 @@ SC00D:: Send("{Raw}" "`` ")
 #HotIf GetKeyState("Capslock", "P")
 {
     L:: {
-        Run("E:\code\HotkeylessAHK\reload.ahk")    
+        Run("D:\Coding\HotkeylessAHK\reload.ahk")    
         Reload
     }
 
@@ -37,22 +34,17 @@ SC00D:: Send("{Raw}" "`` ")
         Send("{Left}")
     }
 
-    B:: Send("^!b")
-    G:: Send("^!j")
-
     X:: callExplorer()
-    W:: callChrome()
+    W:: callFirefox()
     C:: openTerminalInCurrentExplorerDirectory()
     V::
     {
-        if (!WinExist("ahk_exe Code.exe")) {
-            openVSCodeInCurrentExplorerDirectory()
-        } else {
-            callVSCode()
-        }
+        openVSCodeInCurrentExplorerDirectory()
     }
+    Y:: callVSCode()
     S:: switchActiveStreamDeckConfig()
 
+    0:: Send("[0]")
     1:: Send("[1]")
     2:: Send("[2]")
     3:: Send("[3]")
@@ -64,37 +56,3 @@ SC00D:: Send("{Raw}" "`` ")
     9:: Send("[9]")
 }
 #HotIf
-
-; Mouse button shortcuts
-^!F12::
-{
-    if (isPremiereActive()) {
-        Send("N")
-    } else if (isMinecraftActive()) {
-        Send(9)
-    } else {
-        callExplorer()
-    }
-}
-
-^!F11::
-{
-    if (isPremiereActive()) {
-        Send("B")
-    } else if (isMinecraftActive()) {
-        Send(8)
-    } else {
-        callChrome()
-    }
-}
-
-^!F10::
-{
-    if (isPremiereActive()) {
-        premiereClickOnElementPositionProperty()
-    } else if (isMinecraftActive()) {
-        Send(7)
-    } else {
-        callVSCode()
-    }
-}

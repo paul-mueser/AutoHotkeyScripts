@@ -5,15 +5,7 @@ isExplorerActive() {
     return !!WinActive("ahk_class CabinetWClass")
 }
 
-isPremiereActive() {
-    return !!WinActive("ahk_exe Adobe Premiere Pro.exe")
-}
-
-isMinecraftActive() {
-    return !!WinActive("Minecraft* 1.") || !!WinActive("Minecraft 1.") || !!WinActive("FTB")
-}
-
-getTrimmedExplorerWindowTitle() {
+getTrimmedExplorerWindowTitleDepr() {
     if (isExplorerActive()) {
         title := WinGetTitle("ahk_class CabinetWClass")
         if (InStr(title, "weitere Registerkarten")) {
@@ -30,6 +22,16 @@ getTrimmedExplorerWindowTitle() {
     }
 }
 
+getTrimmedExplorerWindowTitle() {
+	if (isExplorerActive) {
+		for window in ComObject("Shell.Application").Windows {
+			if (window.hwnd = WinActive("A")) {
+				return window.Document.Folder.Self.Path
+			}
+		}
+	}
+}
+
 openTerminalInCurrentExplorerDirectory() {
     if (isExplorerActive()) {
         windowTitle := getTrimmedExplorerWindowTitle()
@@ -42,9 +44,9 @@ openTerminalInCurrentExplorerDirectory() {
 openVSCodeInCurrentExplorerDirectory() {
     if (isExplorerActive()) {
         windowTitle := getTrimmedExplorerWindowTitle()
-        Run("`"C:\Users\Sebastian\AppData\Local\Programs\Microsoft VS Code\Code.exe`" " windowTitle)
+        Run("`"F:\Programme\Microsoft VS Code\Code.exe`" `"" windowTitle "`"")
     } else {
-        Run("`"C:\Users\Sebastian\AppData\Local\Programs\Microsoft VS Code\Code.exe`"")
+        Run("`"F:\Programme\Microsoft VS Code\Code.exe`"")
     }
 }
 
@@ -68,37 +70,20 @@ callExplorer() {
 
 callVSCode() {
     if !WinExist("ahk_exe Code.exe")
-        Run("`"C:\Users\Sebastian\AppData\Local\Programs\Microsoft VS Code\Code.exe`"")
+        Run("`"F:\Programme\Microsoft VS Code\Code.exe`"")
     if WinActive("ahk_exe Code.exe")
         Send("^{PgDn}")
     else
         WinActivate("ahk_exe Code.exe")
 }
 
-callChrome() {
-    if !WinExist("ahk_exe chrome.exe")
-        Run("chrome.exe")
-    if WinActive("ahk_exe chrome.exe")
+callFirefox() {
+    if !WinExist("ahk_exe firefox.exe")
+        Run("firefox.exe")
+    if WinActive("ahk_exe firefox.exe")
         Send("^{tab}")
     else
-        WinActivate("ahk_exe chrome.exe")
-}
-
-premiereClickOnElementPositionProperty() {
-    coordX := 85
-    coordY := 135
-
-    ; Handle MOGRTs that add another first property field
-    if (PixelGetColor(46, 133) = "0x616161") {
-        coordX := 91
-        coordY := 154
-    }
-
-    BlockInput("MouseMove")
-    MouseGetPos(&mouseX, &mouseY)
-    MouseClick("left", coordX, coordY, , 0)
-    MouseMove(mouseX, mouseY, 0)
-    BlockInput("MouseMoveOff")
+        WinActivate("ahk_exe firefox.exe")
 }
 
 switchActiveStreamDeckConfig() {
@@ -107,8 +92,8 @@ switchActiveStreamDeckConfig() {
     }
 
     ; Color of the "XL" in the Stream Deck name
-    coordX := 179
-    coordY := 43
+    coordX := 172
+    coordY := 48
     color := PixelGetColor(coordX, coordY)
 
     BlockInput("MouseMove")
@@ -117,11 +102,11 @@ switchActiveStreamDeckConfig() {
     MouseClick("left", coordX, coordY, , 0)
     Sleep(100)
 
-    if (color = "0xE6E6E6") {
-        ; Switch from XL to +
+    if (color = "0xFFFFFF") {
+        ; Switch from + to Normal
         MouseClick("left", coordX, coordY + 40, , 0)
     } else {
-        ; Switch from + to XL
+        ; Switch from Normal to +
         MouseClick("left", coordX, coordY + 60, , 0)
     }
 
