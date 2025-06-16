@@ -1,9 +1,10 @@
 #Requires AutoHotkey v2.0
+#Include "vars.ahk"
 
-SendMode("Input") 
+SendMode("Input")
 
-SetWorkingDir("D:\Coding\HotkeylessAHK\")
-Run("D:\Coding\HotkeylessAHK\HotkeylessAHK.ahk")
+SetWorkingDir(varHotkeylessAHKPath())
+Run(varHotkeylessAHKPath() . "HotkeylessAHK.ahk")
 
-SetWorkingDir("D:\Coding\AutoHotkeyScripts")
-Run("D:\Coding\AutoHotkeyScripts\ahk.ahk")
+SetWorkingDir(varAutoHotkeyScriptsPath())
+Run(varAutoHotkeyScriptsPath() . "ahk.ahk")
