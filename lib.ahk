@@ -42,11 +42,12 @@ openTerminalInCurrentExplorerDirectory() {
 }
 
 openVSCodeInCurrentExplorerDirectory() {
+    vsCodePath := varVSCodePath() . "Microsoft VS Code\Code.exe"
     if (isExplorerActive()) {
         windowTitle := getTrimmedExplorerWindowTitle()
-        Run("`"F:\Programme\Microsoft VS Code\Code.exe`" `"" windowTitle "`"")
+        Run("`"" vsCodePath "`" `"" windowTitle "`"")
     } else {
-        Run("`"F:\Programme\Microsoft VS Code\Code.exe`"")
+        Run("`"" vsCodePath "`"")
     }
 }
 
@@ -70,7 +71,8 @@ callExplorer() {
 
 callVSCode() {
     if !WinExist("ahk_exe Code.exe")
-        Run("`"F:\Programme\Microsoft VS Code\Code.exe`"")
+        vsCodePath := varVSCodePath() . "Microsoft VS Code\Code.exe"
+        Run("`"" vsCodePath "`"")
     if WinActive("ahk_exe Code.exe")
         Send("^{PgDn}")
     else
