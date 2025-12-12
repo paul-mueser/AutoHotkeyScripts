@@ -1,5 +1,6 @@
 ; This file contains shared library files used both in my main scripts and HotkeylessAHK scripts.
 #Requires AutoHotkey v2.0
+#Include "vars.ahk"
 
 isExplorerActive() {
     return !!WinActive("ahk_class CabinetWClass")
