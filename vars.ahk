@@ -7,7 +7,7 @@ varDefaultExplorerCall() {
     if (AHK_TARGET == "PAUL-DESKTOP") {
         return "explorer.exe"
     } else if (AHK_TARGET == "PAULUNILAPTOP") {
-        return "explorer.exe C:\Users\paul2\Desktop\UNI\Semester\Info Git\honigwabe\"
+        return "explorer.exe"
     }
 }
 
